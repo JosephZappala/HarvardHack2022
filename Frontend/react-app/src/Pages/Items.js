@@ -15,8 +15,11 @@ function Items(props) {
         grid={[5, 5]}
         scale={1}
         >
-        <div className='handle'><div className={styles.record} style={{backgroundImage: 'url(' + props.albumImg + ')', backgroundSize: "contain"}}></div></div>
-        {/* <img draggable="false" src={props.albumImg} className={styles.record}></img> */}
+        <div className='handle'>
+            <div className={styles.record} style={{backgroundImage: 'url(' + props.albumImg + ')', backgroundSize: "contain"}}>
+                <div className={styles.recordMiddle} ></div>
+            </div>
+        </div>
         </Draggable>
         
       </div>

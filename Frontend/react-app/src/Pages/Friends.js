@@ -1,18 +1,24 @@
-import {React} from 'react';
+import {React, useState, useEffect} from 'react';
 
-import styles from './Pages.module.css';
 
 function Friends() {
+  let [friends, setFriends] = useState(null)
+
+  useEffect(() => {
+    fetch("/friends")
+    .then(response => response.json())
+    .then(data => setFriends(data.message))
+  },[])
 
   return (
     <div >
       <h1>My Friends</h1>
       <ul>
-        <li>Stephen</li>
-        <li>Keerthi</li>
-        <li>Eshan</li>
-        </ul>
-      
+        {friends.map((key, index) => 
+          <li>{key}</li>
+        )}
+        
+      </ul>
     </div>
   );
 }
