@@ -15,24 +15,25 @@
       transform: rotateZ(0);
     }
     15% {
-      transform: rotateZ(-15deg);
+      transform: rotateZ(-3deg);
     }
     20% {
-      transform: rotateZ(10deg);
+      transform: rotateZ(3deg);
     }
     25% {
-      transform: rotateZ(-10deg);
+      transform: rotateZ(-2deg);
     }
     30% {
-      transform: rotateZ(6deg);
+      transform: rotateZ(2deg);
     }
     35% {
-      transform: rotateZ(-4deg);
+      transform: rotateZ(-1deg);
     }
     40%, 100% {
       transform: rotateZ(0);
     }
   }
+
 
 .libraryItem {
     all: unset;
@@ -51,6 +52,29 @@
     animation-duration: 1s;
 }
 
+.searchItem {
+  all: unset;
+  font-size: 50px;
+  margin: 1.25%;
+  margin-left: 0;
+  padding: 2.5%;
+  width: 100%;
+  background-color: #222222;
+
+  transition: background-color .5s;
+}
+
+
+.searchItem:hover {
+  background-color: #444444
+
+}
+
+.searchItemArtist {
+  font-size: 15px;
+  margin: .5%;
+  padding: 1%;
+}
 
 
 .leftOfPopUp {

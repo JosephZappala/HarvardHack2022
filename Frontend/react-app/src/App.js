@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Routes, Route, useNavigate, Navigate, Link} fr
 import UserPage from './Pages/UserPage';
 import Friends from './Pages/Friends';
 import Library from './Pages/Library';
+import Login from './Pages/Login';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import useMediaQuery from '@mui/material/useMediaQuery';
@@ -20,10 +21,7 @@ import TimelineDot from '@mui/lab/TimelineDot';
 import TimelineOppositeContent from '@mui/lab/TimelineOppositeContent';
 
 import Grid from '@mui/material/Grid';
-
-
-
-
+import SearchResult from './Pages/SearchResults';
 
 
 
@@ -36,8 +34,7 @@ const darkTheme = createTheme({
   });
   
 function App() {
-  
-  
+
 
 return (
 
@@ -105,6 +102,8 @@ return (
         <Route path='/library' element={<Library /> } />
         <Route path='/settings' element={<></> } />
         <Route path='/editpage' element={<EditPage />} />
+        <Route path='/login' element={<Login />} />
+        <Route path='/search' element={<SearchResult />} />
     </Routes>
     </Fragment>
 }       
