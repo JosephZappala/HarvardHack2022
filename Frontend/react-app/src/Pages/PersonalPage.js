@@ -12,8 +12,9 @@ function PersonalPage() {
       <h1>My Page</h1>
       <button> Add New Item</button>
       <div id="mainRoom"> 
-      <img src={wall} className={styles.mainImage} alt="Main Wall"></img>
-      <Items />
+      <img src={wall} draggable="false" className={styles.mainImage} alt="Main Wall"></img>
+
+      <Items xcord={400} ycord={-400} albumImg="https://i.scdn.co/image/ab67616d0000b2734718e2b124f79258be7bc452"></Items>
       </div>
       
       
