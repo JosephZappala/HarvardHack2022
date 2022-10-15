@@ -13,12 +13,14 @@ function Friends() {
   return (
     <div >
       <h1>My Friends</h1>
+      {friends === null ? (<p>You have no friends</p>):(
       <ul>
         {friends.map((key, index) => 
           <li>{key}</li>
         )}
         
-      </ul>
+      </ul>)}
+      
     </div>
   );
 }
