@@ -14,7 +14,7 @@ def friends():
 
 @app.route('/saveroom', methods=['POST'])
 def saveRoom():
-    data = request.json['data']
+    data = request.json
     print("HELLO")
     print(data)
 
