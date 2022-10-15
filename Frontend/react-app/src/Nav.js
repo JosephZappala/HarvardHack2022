@@ -18,8 +18,8 @@ import AdbIcon from '@mui/icons-material/Adb';
 import { styled } from '@mui/material/styles';
 import Paper from '@mui/material/Paper';
 
-const pages = ['home', 'friends', 'mypage'];
-const paths = ['/home', '/friends', '/mypage'];
+const pages = ['home', 'friends', 'my page', 'my library'];
+const paths = ['/', '/friends', '/mypage', '/library'];
 
 const settings = ['Account', 'Logout'];
 
@@ -54,7 +54,7 @@ function Nav() {
               variant="h6"
               noWrap
               component="a"
-              href="/"
+              
               sx={{
                 mr: 2,
                 display: { xs: 'none', md: 'flex' },

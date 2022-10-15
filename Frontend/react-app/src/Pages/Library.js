@@ -1,21 +1,35 @@
-import {React} from 'react';
+import {React, useState, useEffect, Fragment} from 'react';
 import styles from './Pages.module.css';
 import LibraryItem from './LibraryItem';
 
 function Library() {
+ let [results, setResults] = useState(null)
 
+  useEffect(() => {
+    fetch("/api/library", {
+      headers:{
+        "accepts":"application/json"
+
+      },
+      body: JSON.stringify({
+        name: sessionStorage.getItem("user"),
+        
+      })
+    })
+    .then(response => response.json())
+    .then(data => setResults(data.message))
+  },[])
     
   return (
     <div >
       <h1>My Library</h1>
       <div>
-      <LibraryItem albumName="Starboy" link="https://open.spotify.com/album/2ODvWsOgouMbaA5xf0RkJe" albumImg="https://i.scdn.co/image/ab67616d0000b2734718e2b124f79258be7bc452" />
-      <LibraryItem albumName="Starboy" link="https://open.spotify.com/album/2ODvWsOgouMbaA5xf0RkJe" albumImg="https://i.scdn.co/image/ab67616d0000b2734718e2b124f79258be7bc452" />
-      <LibraryItem albumName="Starboy" link="https://open.spotify.com/album/2ODvWsOgouMbaA5xf0RkJe" albumImg="https://i.scdn.co/image/ab67616d0000b2734718e2b124f79258be7bc452" />
-      <LibraryItem albumName="Starboy" link="https://open.spotify.com/album/2ODvWsOgouMbaA5xf0RkJe" albumImg="https://i.scdn.co/image/ab67616d0000b2734718e2b124f79258be7bc452" />
-      <LibraryItem albumName="Starboy" link="https://open.spotify.com/album/2ODvWsOgouMbaA5xf0RkJe" albumImg="https://i.scdn.co/image/ab67616d0000b2734718e2b124f79258be7bc452" />
-      <LibraryItem albumName="Starboy" link="https://open.spotify.com/album/2ODvWsOgouMbaA5xf0RkJe" albumImg="https://i.scdn.co/image/ab67616d0000b2734718e2b124f79258be7bc452" />
-      <LibraryItem albumName="Starboy" link="https://open.spotify.com/album/2ODvWsOgouMbaA5xf0RkJe" albumImg="https://i.scdn.co/image/ab67616d0000b2734718e2b124f79258be7bc452" />  
+      {results === null ? (<p>You have nothing in your library</p>):(
+      
+        results.map((key) => 
+            <LibraryItem albumName={key.albumName} link={key.link} albumImg={key.albumLink} />
+        ))
+        }
     </div>
 
     </div>

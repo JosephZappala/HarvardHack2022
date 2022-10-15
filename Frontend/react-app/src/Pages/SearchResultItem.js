@@ -9,7 +9,7 @@ import { rgbToHex } from '@mui/material';
 
 
 
-function LibraryItem(props) {
+function SearchResultItem(props) {
     const [color1, setColor1] = useState();
     const [color2, setColor2] = useState();
     const [open, setOpen] = useState(false);
@@ -24,7 +24,7 @@ function LibraryItem(props) {
         width: '60%',
         height: '80%',
         bgcolor: 'white',
-        opacity: 0.8,
+        opacity: 1,
         //background: ('repeating-linear-gradient( 45deg, ' + color2 + ', ' + color2 + ' 5px, ' + color1 + '5px, ' + color1 + ' 25px )'),
         border: '2px solid #000',
         boxShadow: 24,
@@ -83,7 +83,7 @@ function LibraryItem(props) {
 
 
 
-            <button id={props.index} onClick={openPopUp} className={styles.libraryItem} style={{ backgroundImage: 'url(' + props.albumImg + ')', backgroundSize: "contain" }}>
+            <button id={props.index} onClick={openPopUp} className={styles.searchItem} >{props.albumName} <p className={styles.searchItemArtist}>{props.artist}</p>
             </button>
 
         </div>
@@ -91,4 +91,4 @@ function LibraryItem(props) {
     );
 }
 
-export default LibraryItem;
+export default SearchResultItem;

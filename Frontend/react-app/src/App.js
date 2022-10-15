@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Routes, Route, useNavigate, Navigate, Link} fr
 import UserPage from './Pages/UserPage';
 import Friends from './Pages/Friends';
 import Library from './Pages/Library';
+import Login from './Pages/Login';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import useMediaQuery from '@mui/material/useMediaQuery';
@@ -29,15 +30,8 @@ import LibraryMusicIcon from '@mui/icons-material/LibraryMusic';
 import Typography from '@mui/material/Typography';
 
 import Grid from '@mui/material/Grid';
-import Skeleton from '@mui/material/Skeleton';
-
-
-
-
- 
-
-
-
+import SearchResult from './Pages/SearchResults';
+import HomePage from './Pages/HomePage';
 
 
 
@@ -207,27 +201,19 @@ return (
 <Fragment>
 <Nav></Nav>
 
-
-<Routes>
-    <Route path='/'  element={<h1></h1>} />
-    <Route path='/mypage' element={<UserPage />} />
-    <Route path='/friends' element={<Friends />} />
-    <Route path='/library' element={<Library /> } />
-    <Route path='/settings' element={<></> } />
-    <Route path='/editpage' element={<EditPage />} />
-</Routes>
-</Fragment>
-  
-
-
-
-
-
-    
-</Grid>
-      
- 
-  
+    <Routes>
+        <Route path='/'  element={<HomePage />} />
+        <Route path='/mypage' element={<UserPage account={sessionStorage.getItem("user")}/>} />
+        <Route path='/friends' element={<Friends />} />
+        <Route path='/library' element={<Library /> } />
+        <Route path='/settings' element={<></> } />
+        <Route path='/editpage' element={<EditPage />} />
+        <Route path='/login' element={<Login />} />
+        <Route path='/search' element={<SearchResult />} />
+    </Routes>
+    </Fragment>
+}       
+  </Grid>
 </Grid>
 
 
