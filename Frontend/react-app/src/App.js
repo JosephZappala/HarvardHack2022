@@ -8,6 +8,9 @@ import Friends from './Pages/Friends';
   
 function App() {
 return (
+
+
+
     <Router>
     <Navbar />
     <Routes>
