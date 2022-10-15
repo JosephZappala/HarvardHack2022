@@ -5,7 +5,11 @@ function Friends() {
   let [friends, setFriends] = useState(null)
 
   useEffect(() => {
-    fetch("/friends")
+    fetch("http://127.0.0.1:5000/friends", {
+      headers:{
+        "accepts":"application/json"
+      }
+    })
     .then(response => response.json())
     .then(data => setFriends(data.message))
   },[])

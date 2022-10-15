@@ -7,9 +7,8 @@ def index():
     return "Hello, World!"
 
 
-@app.route('/friends')
+@app.route('/friends', methods=['GET'])
 def friends():
-    return ["Stephen", "Joseph", "Eshan"]
-
+    return {"message" :"friends"}
 if __name__ == "__main__":
     app.run(debug=True)
