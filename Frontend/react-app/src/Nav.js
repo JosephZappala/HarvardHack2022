@@ -21,7 +21,7 @@ import Paper from '@mui/material/Paper';
 const pages = ['home', 'friends', 'mypage'];
 const paths = ['/home', '/friends', '/mypage'];
 
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+const settings = ['Account', 'Logout'];
 
 
 function Nav() {

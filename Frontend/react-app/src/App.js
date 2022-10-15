@@ -18,9 +18,23 @@ import TimelineConnector from '@mui/lab/TimelineConnector';
 import TimelineContent from '@mui/lab/TimelineContent';
 import TimelineDot from '@mui/lab/TimelineDot';
 import TimelineOppositeContent from '@mui/lab/TimelineOppositeContent';
+import Box from '@mui/material/Box';
+import Container from '@mui/material/Container';
+import Paper from '@mui/material/Paper';
+
+
+
+
+import LibraryMusicIcon from '@mui/icons-material/LibraryMusic';
+import Typography from '@mui/material/Typography';
 
 import Grid from '@mui/material/Grid';
+import Skeleton from '@mui/material/Skeleton';
 
+
+
+
+ 
 
 
 
@@ -35,81 +49,191 @@ const darkTheme = createTheme({
     },
   });
   
-function App() {
+
   
+  
+function App() {
+
+
   
 
 return (
 
-    
   
 
     <ThemeProvider theme={darkTheme}>
     <CssBaseline />
-    <Grid container spacing={2}>
-  <Grid item xs={2}>
+  
+
+<Grid container spacing={2}  >
+
+
+
+
+  <Grid item xs={2} color = "white" fontFamily={"Apple Color Emoji"} align = 'left'>
+
   <React.Fragment>
-      <Timeline position="alternate">
-        <TimelineItem>
-          <TimelineOppositeContent color="text.secondary">
-            decade1
-          </TimelineOppositeContent>
-          <TimelineSeparator>
-            <TimelineDot />
-            <TimelineConnector />
-          </TimelineSeparator>
-          <TimelineContent></TimelineContent>
-        </TimelineItem>
-        <TimelineItem>
-          <TimelineOppositeContent color="text.secondary">
-            decade2
-          </TimelineOppositeContent>
-          <TimelineSeparator>
-            <TimelineDot />
-            <TimelineConnector />
-          </TimelineSeparator>
-          <TimelineContent></TimelineContent>
-        </TimelineItem>
-        <TimelineItem>
-          <TimelineOppositeContent color="text.secondary">
-            decade3
-          </TimelineOppositeContent>
-          <TimelineSeparator>
-            <TimelineDot />
-            <TimelineConnector />
-          </TimelineSeparator>
-          <TimelineContent></TimelineContent>
-        </TimelineItem>
-        <TimelineItem>
-          <TimelineOppositeContent color="text.secondary">
-            decade4
-          </TimelineOppositeContent>
-          <TimelineSeparator>
-            <TimelineDot />
-            <TimelineConnector />
-          </TimelineSeparator>
-          <TimelineContent></TimelineContent>
-        </TimelineItem>
-      </Timeline>
+
+  <Paper
+      sx={{
+        p: 2,
+        maxWidth: 250,
+        margin: 3,
+        flexGrow: 1,
+        backgroundColor: '#1db954',
+        // textAlign: 'center',
+        // align: 'left',
+        justifyContent: 'flex-end' 
+      }}
+    >
+
+
+  <Timeline position="alternate" align="left">
+      <TimelineItem>
+        <TimelineOppositeContent
+          sx={{ m: 'auto 0' ,flex: 0.2, align : "left" }}
+          align="right"
+          
+          variant="body2"
+          color="text.secondary"
+        >
+        </TimelineOppositeContent>
+        <TimelineSeparator>
+          <TimelineConnector />
+          <TimelineDot  sx={{
+           
+        }}>
+            <LibraryMusicIcon />
+          </TimelineDot>
+          <TimelineConnector />
+        </TimelineSeparator>
+        <TimelineContent sx={{ py: '80px', px: 2 , color : 'black', fontSize : 15, fontWeight: 700}}>
+          <Typography variant="h6" component="span" >
+            1970s
+          </Typography>
+          <Typography> Catch you on the flip side</Typography>
+        </TimelineContent>
+      </TimelineItem>
+      <TimelineItem>
+        <TimelineOppositeContent
+          sx={{ m: 'auto 0',flex: 0.2, align : "left" }}
+          variant="body2"
+          color="text.secondary"
+        >
+        </TimelineOppositeContent>
+        <TimelineSeparator>
+          <TimelineConnector />
+          <TimelineDot color="primary" >
+            <LibraryMusicIcon />
+          </TimelineDot>
+          <TimelineConnector />
+        </TimelineSeparator>
+        <TimelineContent sx={{ py: '80px', px: 4, align : "left"  }}>
+          <Typography variant="h6" component="span">
+            1980s
+          </Typography>
+          <Typography> Gnarly</Typography>
+        </TimelineContent>
+      </TimelineItem>
+      <TimelineItem>
+        <TimelineSeparator>
+          <TimelineConnector />
+          <TimelineDot color="primary" variant="outlined">
+            <LibraryMusicIcon />
+          </TimelineDot>
+          <TimelineConnector sx={{ bgcolor: 'secondary.main' }} />
+        </TimelineSeparator>
+        <TimelineContent sx={{ py: '80px', px: 2 }}>
+          <Typography variant="h6" component="span">
+            1990s
+          </Typography>
+          <Typography>Get jiggy</Typography>
+        </TimelineContent>
+      </TimelineItem>
+      <TimelineItem>
+        <TimelineSeparator>
+          <TimelineConnector sx={{ bgcolor: 'secondary.main' }} />
+          <TimelineDot color="secondary">
+            <LibraryMusicIcon />
+          </TimelineDot>
+          <TimelineConnector />
+        </TimelineSeparator>
+        <TimelineContent sx={{ py: '80px', px: 4, align : "left" }}>
+          <Typography variant="h6" component="span">
+            2000s
+          </Typography>
+          <Typography>BFF </Typography>
+        </TimelineContent >
+      </TimelineItem>
+      <TimelineItem>
+        <TimelineSeparator>
+          <TimelineConnector sx={{ bgcolor: 'secondary.main' }} />
+          <TimelineDot color="primary">
+            <LibraryMusicIcon />
+          </TimelineDot>
+          <TimelineConnector />
+        </TimelineSeparator>
+        <TimelineContent sx={{ py: '80px', px: 2, align : "left" }}>
+          <Typography variant="h6" component="span" fontFamily={'sans-serif'}>
+            2010s
+          </Typography>
+          <Typography> Chillax</Typography>
+        </TimelineContent>
+      </TimelineItem>
+      <TimelineItem>
+        <TimelineSeparator>
+          <TimelineConnector sx={{ bgcolor: 'primary.main' }} />
+          <TimelineDot color="primary">
+            <LibraryMusicIcon />
+          </TimelineDot>
+          <TimelineConnector />
+        </TimelineSeparator>
+        <TimelineContent sx={{ py: '80px', px: 4, align : "left" }}>
+          <Typography variant="h6" component="span">
+            2020s
+          </Typography>
+          <Typography> Slaps</Typography>
+        </TimelineContent>
+      </TimelineItem>
+    </Timeline>
+    </Paper>
     </React.Fragment>
   </Grid>
-  <Grid item xs={10}>
-  { 
-    <Fragment>
-    <Nav></Nav>
 
-    <Routes>
-        <Route path='/'  element={<h1>WELCOME</h1>} />
-        <Route path='/mypage' element={<UserPage />} />
-        <Route path='/friends' element={<Friends />} />
-        <Route path='/library' element={<Library /> } />
-        <Route path='/settings' element={<></> } />
-        <Route path='/editpage' element={<EditPage />} />
-    </Routes>
-    </Fragment>
-}       
-  </Grid>
+
+
+  <Grid item xs={10}>
+
+<Fragment>
+<Nav></Nav>
+
+
+<Routes>
+    <Route path='/'  element={<h1></h1>} />
+    <Route path='/mypage' element={<UserPage />} />
+    <Route path='/friends' element={<Friends />} />
+    <Route path='/library' element={<Library /> } />
+    <Route path='/settings' element={<></> } />
+    <Route path='/editpage' element={<EditPage />} />
+</Routes>
+</Fragment>
+  
+
+
+
+
+
+    
 </Grid>
+      
+ 
+  
+</Grid>
+
+
+
+
+
 
 
        
