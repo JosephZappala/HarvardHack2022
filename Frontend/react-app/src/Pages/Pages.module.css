@@ -18,3 +18,16 @@
     background-color: white;
     border-color: black;
 }
+
+.leftOfPopUp {
+    width: 20%;
+    margin: 1%;
+    
+    
+    float: left;
+}
+.rightOfPopUp {
+    width: 5%;
+    padding-left: 20%;
+    float:right;
+}
