@@ -8,14 +8,28 @@ import 'reactjs-popup/dist/index.css';
 function Items(props) {
   const [open, setOpen] = useState(false);
   const closeModal = () => setOpen(false);
-    function openPopUp() {
+    function openPopUp(doc) {
       if (props.notEdit) {
         setOpen(true)
+      }
+      else {
+
+        var rect = doc.getElementById(props.index).getBoundingClientRect()
+  
+        var left = rect.left;
+        var top = rect.top + window.scrollY - 1137.28125;
+        var dict ={};
+        if (sessionStorage.getItem("changingPage") !== null) {
+          dict = JSON.parse(sessionStorage.getItem("changingPage"));
+        }
+        dict[props.index] = [left, top]
+        sessionStorage.setItem("changingPage", JSON.stringify(dict))
+  
       }
     }
 
     return (
-      <div >
+      <div style={{height: 0,width: 0}}>
         <Popup position="center" open={open} closeOnDocumentClick onClose={closeModal} >
           
           <div className={styles.leftOfPopUp}>
@@ -39,8 +53,7 @@ function Items(props) {
         >
         <div className='handle'>
           
-          <button  onClick={openPopUp} className={styles.record} style={{backgroundImage: 'url(' + props.albumImg + ')', backgroundSize: "contain"}}>
-                <div className={styles.recordMiddle} ></div>
+          <button id={props.index} onClick={() => openPopUp(document)} className={styles.item} style={{backgroundImage: 'url(' + props.albumImg + ')', backgroundSize: "contain"}}>
           </button>
             
         </div>

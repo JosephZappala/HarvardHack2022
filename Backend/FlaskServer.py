@@ -15,8 +15,8 @@ def friends():
 @app.route('/saveroom', methods=['POST'])
 def saveRoom():
     data = request.json
-    print("HELLO")
     print(data)
+    return {"message":"success"}
 
 if __name__ == "__main__":
     app.run(debug=True, port=8080)

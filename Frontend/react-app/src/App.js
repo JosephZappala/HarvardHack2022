@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Routes, Route, useNavigate} from 'react-router
 
 import UserPage from './Pages/UserPage';
 import Friends from './Pages/Friends';
+import Library from './Pages/Library';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import useMediaQuery from '@mui/material/useMediaQuery';
@@ -140,7 +141,7 @@ return (
                 <Route path='/'  element={<h1>WELCOME</h1>} />
                 <Route path='/mypage' element={<UserPage />} />
                 <Route path='/friends' element={<Friends />} />
-                <Route path='/blogs' element={<></> } />
+                <Route path='/library' element={<Library /> } />
                 <Route path='/settings' element={<></> } />
                 <Route path='/editpage' element={<EditPage />} />
             </Routes>
