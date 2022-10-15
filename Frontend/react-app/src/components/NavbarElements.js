@@ -15,6 +15,7 @@ color: #808080;
 display: flex;
 align-items: center;
 text-decoration: none;
+font-family : 'Hevletica';
 padding: 0 1rem;
 height: 100%;
 cursor: pointer;
