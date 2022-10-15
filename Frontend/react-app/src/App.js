@@ -22,6 +22,7 @@ import TimelineOppositeContent from '@mui/lab/TimelineOppositeContent';
 
 import Grid from '@mui/material/Grid';
 import SearchResult from './Pages/SearchResults';
+import HomePage from './Pages/HomePage';
 
 
 
@@ -44,7 +45,7 @@ return (
     <ThemeProvider theme={darkTheme}>
     <CssBaseline />
     <Grid container spacing={2}>
-  <Grid item xs={2}>
+  <Grid item xs={2} >
   <React.Fragment>
       <Timeline position="alternate">
         <TimelineItem>
@@ -96,8 +97,8 @@ return (
     <Nav></Nav>
 
     <Routes>
-        <Route path='/'  element={<h1>WELCOME</h1>} />
-        <Route path='/mypage' element={<UserPage />} />
+        <Route path='/'  element={<HomePage />} />
+        <Route path='/mypage' element={<UserPage account={sessionStorage.getItem("user")}/>} />
         <Route path='/friends' element={<Friends />} />
         <Route path='/library' element={<Library /> } />
         <Route path='/settings' element={<></> } />

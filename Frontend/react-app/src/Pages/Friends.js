@@ -5,7 +5,7 @@ function Friends() {
   let [friends, setFriends] = useState(null)
 
   useEffect(() => {
-    fetch("/friendlist", {
+    fetch("/api/friends", {
       headers:{
         "accepts":"application/json"
       }
