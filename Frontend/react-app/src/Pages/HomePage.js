@@ -29,7 +29,7 @@ function HomePage() {
         margin: 'auto',
         flexGrow: 1,
         backgroundColor: (theme) =>
-          theme.palette.mode = '#fff',
+          theme.palette.mode = 'rgb(165, 107, 65)',
       }}
     >
             <img src={myGif} alt="my-gif" />
