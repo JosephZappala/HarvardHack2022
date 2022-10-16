@@ -17,7 +17,7 @@ userName = 'root'
 password = 'Wolfie69medaddy!'
 dbName = 'Test'
 
-userID = 'stevebyrnesmail@gmail.com'
+userID = 'steve'
 login_password = 'hackharvard2022'
 
 # ---------------------------------------- SpotiPy Initializations ---------------------------------------- #
@@ -338,7 +338,32 @@ def helpJoe():
     
 # ---------------------------------------- Main Testing ---------------------------------------- #
 
-connection = create_connection(hostName, "guest", password, dbName)
+connection = create_connection(hostName, userName, password, dbName)
+
+execute_query(connection, "DROP TABLE IF EXISTS `Albums`;")
+execute_query(connection, "DROP TABLE IF EXISTS `Users`;")
+execute_query(connection, "DROP TABLE IF EXISTS `Requests`;")
+
+execute_query(connection, createAlbumTableQuery(dbName))
+execute_query(connection, createUserTableQuery(dbName))
+execute_query(connection, createRequestTableQuery(dbName))
+
+execute_query(connection, addUserQuery(userID, login_password))
+execute_query(connection, addUserQuery('joe', 'password'))
+execute_query(connection, addUserQuery('eshan', 'Poopathon'))
+execute_query(connection, addUserQuery('keerthi', 'kman234'))
+execute_query(connection, addUserQuery('max', 'andrewtate69'))
+execute_query(connection, addUserQuery('nate', 'hackharvard'))
+execute_query(connection, addUserQuery('samarth', 'Chickenoverpita44'))
+execute_query(connection, addUserQuery('rafid', 'Sila45'))
+execute_query(connection, addUserQuery('saad', 'qualcommBayArea2000'))
+execute_query(connection, addUserQuery('tylon', 'sussybakka33'))
+execute_query(connection, addUserQuery('jason', 'notobacco65'))
+
+execute_query(connection, addAlbumWithSearch('mariah carey', 20, 'steve'))
+execute_query(connection, addAlbumWithSearch('nirvana', 20, 'joe'))
+execute_query(connection, addAlbumWithSearch('eminem', 20, 'eshan'))
+execute_query(connection, addAlbumWithSearch('godzilla', 20, 'keerthi'))
 
 # ---------------------------------------- Flask STUFFFF ---------------------------------------- #
 
@@ -436,10 +461,4 @@ def takeFromWall():
 if __name__ == "__main__":
     app.run(debug=True, port=8080)
 
-# execute_query(connection, "DROP TABLE IF EXISTS `Albums`;")
-# execute_query(connection, "DROP TABLE IF EXISTS `Users`;")
-# execute_query(connection, "DROP TABLE IF EXISTS `Requests`;")
-# execute_query(connection, createAlbumTableQuery(dbName))
-# execute_query(connection, createUserTableQuery(dbName))
-# execute_query(connection, createRequestTableQuery(dbName))
-# execute_query(connection, addUserQuery(login_username, login_password))
+
