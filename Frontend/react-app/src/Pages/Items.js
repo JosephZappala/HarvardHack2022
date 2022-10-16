@@ -46,7 +46,7 @@ function Items(props) {
         <Draggable
         handle=".handle"
         disabled={props.notEdit}
-        defaultPosition={{x: props.xcord, y: props.ycord}}
+        defaultPosition={{x: parseFloat(props.xcord), y: parseFloat(props.ycord)}}
         position={null}
         grid={[5, 5]}
         scale={1}

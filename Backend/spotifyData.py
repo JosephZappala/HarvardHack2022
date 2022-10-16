@@ -1,5 +1,6 @@
 from random import randrange
 from flask import Flask, request
+import json
 
 
 import mysql.connector
@@ -291,15 +292,21 @@ def library():
 @app.route('/api/page', methods=['GET'])
 def getPage():
     name = request.headers['Name']
-    answer = execute_read_query(connection, get(name))
-    #print(answer)
+    answer = execute_read_query(connection, getWallArtwork(name))
     return {"message" : answer}
 
 
 @app.route('/api/saveroom', methods=['POST'])
 def saveRoom():
     data = request.json
-    print(data)
+    name = request.headers['Name']
+    if type(data) == dict:
+        key = list(data.keys())[0]
+        execute_query(connection, moveArtworkQuery(key, name, data[key][0], data[key][1]))
+        return {"message":"success"}
+    for dat in data:
+        key = list(dat.keys())[0]
+        execute_query(connection, moveArtworkQuery(key, name, dat[key][0], dat[key][1]))
     return {"message":"success"}
 
 @app.route('/api/addtowall', methods=['POST'])
