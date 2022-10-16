@@ -89,6 +89,16 @@ def createUserTableQuery(db):
         """
     return query
 
+def createRequestTableQuery(db):
+    query = "CREATE TABLE IF NOT EXISTS `" + db + """`.`Requests` (
+        `call` VARCHAR(50) NOT NULL,
+        `response` VARCHAR(50) NOT NULL,
+        `status` VARCHAR(50) NOT NULL,
+        PRIMARY KEY (`call`, `response`)
+        );
+        """
+    return query
+
 def addAlbumQuery(uri, title, artist, releaseDate, artwork, link, userID):
     query = "INSERT INTO `Albums` (uri, title, artist, releaseDate, artwork, link, userID) VALUES ('"
     query = query + str(uri) + "', '"
@@ -145,6 +155,32 @@ def addUserQuery(userID, password):
 def getUserQuery(userID):
     return "SELECT * FROM `Users` WHERE userID = '" + str(userID) + "';"
 
+def getUsersQuery():
+    return "SELECT * FROM `Users` WHERE userID IS NOT NULL AND password IS NOT NULL;"
+
+# ---------------------------------------- MySQL Request Queries ---------------------------------------- #
+
+def addFriendRequestQuery(userID, personID):
+    query = "INSERT INTO `Requests` (call, response, status) VALUES ('"
+    query = query + userID + "', '"
+    query = query + personID + "', 'pending');"
+    return query
+
+def acceptRequestQuery(userID, personID):
+    return "UPDATE Requests SET 'status' = 'accepted' WHERE `call` = '" + userID + "' AND `response` = '" + personID + "';"
+
+def rejectRequestQuery(userID, personID):
+    return "UPDATE Requests SET 'status' = 'rejected' WHERE `call` = '" + userID + "' AND `response` = '" + personID + "';"
+
+def getFriendsQuery(userID):
+    return "SELECT `response` FROM `Requests` WHERE `userID` = '" + userID + "' AND `call` = 'accepted';" 
+
+def getPendingQuery(userID):
+    return "SELECT `response` FROM `Requests` WHERE `userID` = '" + userID + "' AND `call` = 'pending';"
+
+def removeRejectedQuery():
+    return "DELETE FROM `Requests` WHERE 'status' = 'rejected';"
+
 # ---------------------------------------- MySQL Functions ---------------------------------------- #
 
 def getAlbumInfoLibrary(uri, userID):
@@ -162,6 +198,16 @@ def addToLibrary(uri, title, artist, releaseDate, artwork, link, userID):
 def removeFromLibrary(uri, userID):
     execute_query(connection, deleteAlbumQuery(uri, userID))
     return
+
+def getUsersFromSearch(search_str):
+    people = []
+    try:
+        users = execute_read_query(connection, getUserQuery)
+        for p in users:
+            people.append(p)
+    except TypeError:
+        print('Error: No Results Found')
+    return p
 
 # ---------------------------------------- SpotiPy Data-Retrieving Functions ---------------------------------------- #
 
@@ -203,6 +249,32 @@ def previewAlbum(uri):
     halfway = songDuration / 2
     spotify.seek_track(halfway)
     spotify.start_playback(uri)
+    return
+
+# ---------------------------------------- Request Functions ---------------------------------------- #
+
+def getFriends(userID):
+    friends = []
+    try:
+        friends = execute_read_query(connection, getFriendsQuery(userID))
+        for friend in friends:
+            print(friend)
+    except TypeError:
+        print('Error: No Results Found')
+    return friends
+
+def getPending(userID):
+    friends = []
+    try:
+        friends = execute_read_query(connection, getPendingQuery(userID))
+        for friend in friends:
+            print(friend)
+    except TypeError:
+        print('Error: No Results Found')
+    return friends
+
+def removeRejected(userID, peopleID):
+    execute_query(connection, removeRejectedQuery)
     return
 
 # ---------------------------------------- Full-Functions ---------------------------------------- #
@@ -346,6 +418,8 @@ if __name__ == "__main__":
 
 # execute_query(connection, "DROP TABLE IF EXISTS `Albums`;")
 # execute_query(connection, "DROP TABLE IF EXISTS `Users`;")
+# execute_query(connection, "DROP TABLE IF EXISTS `Requests`;")
 # execute_query(connection, createAlbumTableQuery(dbName))
 # execute_query(connection, createUserTableQuery(dbName))
+# execute_query(connection, createRequestTableQuery(dbName))
 # execute_query(connection, addUserQuery(login_username, login_password))
