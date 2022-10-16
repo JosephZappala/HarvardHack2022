@@ -95,6 +95,18 @@
   transition: background-color .5s;
 }
 
+.searchPeople {
+  all: unset;
+  font-size: 20px;
+  margin: 1.25%;
+  margin-left: 0;
+  padding: 2.5%;
+  width: 35%;
+  background-color: #222222;
+
+  transition: background-color .5s;
+}
+
 
 .searchItem:hover {
   background-color: #444444
@@ -158,4 +170,11 @@
   transform: translateY(-2px);
 }
 
-
+.hiddenButton {
+  background-color: Transparent;
+    background-repeat:no-repeat;
+    border: none;
+    cursor:pointer;
+    overflow: hidden; 
+    outline:none
+}

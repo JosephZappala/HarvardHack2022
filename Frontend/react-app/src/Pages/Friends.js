@@ -115,7 +115,7 @@ function addRequest(friend) {
                         <ul>
                           {people.map((key) => 
                           <Fragment>
-                            <li className={styles.searchItem}>{key}</li>
+                            <li className={styles.searchPeople}>{key}</li>
                             <button onClick={addFriend(key)} style={{float:"right"}}>Add Friend</button>
                             </Fragment>
                           )}

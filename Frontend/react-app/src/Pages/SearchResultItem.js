@@ -23,7 +23,7 @@ function SearchResultItem(props) {
         transform: 'translate(-50%, -50%)',
         width: '60%',
         height: '80%',
-        bgcolor: 'white',
+        bgcolor: '#444444',
         opacity: 1,
         //background: ('repeating-linear-gradient( 45deg, ' + color2 + ', ' + color2 + ' 5px, ' + color1 + '5px, ' + color1 + ' 25px )'),
         border: '2px solid #000',
@@ -38,6 +38,7 @@ function SearchResultItem(props) {
               "accepts":"application/json",
               "name": sessionStorage.getItem("user"),
               "uri": props.uri
+
             }
           })
     }

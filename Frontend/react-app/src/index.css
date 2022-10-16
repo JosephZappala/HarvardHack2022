@@ -1,3 +1,13 @@
+html {
+  background-color: #000;
+  scroll-behavior: smooth;
+  
+}
+header {
+  background-color: #000;
+
+}
+
 body {
   font-family: Roboto, -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
   margin: 0;
@@ -5,7 +15,7 @@ body {
   font-weight: 1.5;
   line-height: 1.5;
   color: #292b2c;
-  background-color: #fff;
+  background: #222222 
 }
 
 code {

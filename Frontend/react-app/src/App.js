@@ -100,18 +100,21 @@ return (
         </TimelineOppositeContent>
         <TimelineSeparator>
           <TimelineConnector />
+          <a href="#20s" className={styles.hiddenButton}>
           <TimelineDot  sx={{
            
         }}>
             <LibraryMusicIcon />
           </TimelineDot>
+          </a>
           <TimelineConnector />
         </TimelineSeparator>
         <TimelineContent sx={{ py: '80px', px: 2 , color : 'black', fontSize : 15, fontWeight: 700}}>
+        
           <Typography variant="h6" component="span" >
-            1970s
+            2020s
           </Typography>
-          <Typography> Catch you on the flip side</Typography>
+          <Typography> Slaps</Typography>
         </TimelineContent>
       </TimelineItem>
       <TimelineItem>
@@ -123,58 +126,15 @@ return (
         </TimelineOppositeContent>
         <TimelineSeparator>
           <TimelineConnector />
+          <a href="#10s" className={styles.hiddenButton}>
           <TimelineDot color="primary" >
             <LibraryMusicIcon />
           </TimelineDot>
+          </a>
           <TimelineConnector />
         </TimelineSeparator>
         <TimelineContent sx={{ py: '80px', px: 4, align : "left"  }}>
           <Typography variant="h6" component="span">
-            1980s
-          </Typography>
-          <Typography> Gnarly</Typography>
-        </TimelineContent>
-      </TimelineItem>
-      <TimelineItem>
-        <TimelineSeparator>
-          <TimelineConnector />
-          <TimelineDot color="primary" variant="outlined">
-            <LibraryMusicIcon />
-          </TimelineDot>
-          <TimelineConnector sx={{ bgcolor: 'secondary.main' }} />
-        </TimelineSeparator>
-        <TimelineContent sx={{ py: '80px', px: 2 }}>
-          <Typography variant="h6" component="span">
-            1990s
-          </Typography>
-          <Typography>Get jiggy</Typography>
-        </TimelineContent>
-      </TimelineItem>
-      <TimelineItem>
-        <TimelineSeparator>
-          <TimelineConnector sx={{ bgcolor: 'secondary.main' }} />
-          <TimelineDot color="secondary">
-            <LibraryMusicIcon />
-          </TimelineDot>
-          <TimelineConnector />
-        </TimelineSeparator>
-        <TimelineContent sx={{ py: '80px', px: 4, align : "left" }}>
-          <Typography variant="h6" component="span">
-            2000s
-          </Typography>
-          <Typography>BFF </Typography>
-        </TimelineContent >
-      </TimelineItem>
-      <TimelineItem>
-        <TimelineSeparator>
-          <TimelineConnector sx={{ bgcolor: 'secondary.main' }} />
-          <TimelineDot color="primary">
-            <LibraryMusicIcon />
-          </TimelineDot>
-          <TimelineConnector />
-        </TimelineSeparator>
-        <TimelineContent sx={{ py: '80px', px: 2, align : "left" }}>
-          <Typography variant="h6" component="span" fontFamily={'sans-serif'}>
             2010s
           </Typography>
           <Typography> Chillax</Typography>
@@ -182,17 +142,70 @@ return (
       </TimelineItem>
       <TimelineItem>
         <TimelineSeparator>
-          <TimelineConnector sx={{ bgcolor: 'primary.main' }} />
-          <TimelineDot color="primary">
+          <TimelineConnector />
+          <a href="#00s" className={styles.hiddenButton}>
+          <TimelineDot color="primary" variant="outlined">
             <LibraryMusicIcon />
           </TimelineDot>
+          </a>
+          <TimelineConnector sx={{ bgcolor: 'secondary.main' }} />
+        </TimelineSeparator>
+        <TimelineContent sx={{ py: '80px', px: 2 }}>
+          <Typography variant="h6" component="span">
+            2000s
+          </Typography>
+          <Typography>BFF</Typography>
+        </TimelineContent>
+      </TimelineItem>
+      <TimelineItem>
+        <TimelineSeparator>
+          <TimelineConnector sx={{ bgcolor: 'secondary.main' }} />
+          <a href="#90s" className={styles.hiddenButton}>
+          <TimelineDot color="secondary">
+            <LibraryMusicIcon />
+          </TimelineDot>
+          </a>
           <TimelineConnector />
         </TimelineSeparator>
         <TimelineContent sx={{ py: '80px', px: 4, align : "left" }}>
           <Typography variant="h6" component="span">
-            2020s
+            1990s
           </Typography>
-          <Typography> Slaps</Typography>
+          <Typography>Get Jiggy With It </Typography>
+        </TimelineContent >
+      </TimelineItem>
+      <TimelineItem>
+        <TimelineSeparator>
+          <TimelineConnector sx={{ bgcolor: 'secondary.main' }} />
+          <a href="#80s" className={styles.hiddenButton}>
+          <TimelineDot color="primary">
+            <LibraryMusicIcon />
+          </TimelineDot>
+          </a>
+          <TimelineConnector />
+        </TimelineSeparator>
+        <TimelineContent sx={{ py: '80px', px: 2, align : "left" }}>
+          <Typography variant="h6" component="span" fontFamily={'sans-serif'}>
+            1980s
+          </Typography>
+          <Typography> Gnarly</Typography>
+        </TimelineContent>
+      </TimelineItem>
+      <TimelineItem>
+        <TimelineSeparator>
+          <TimelineConnector sx={{ bgcolor: 'primary.main' }} />
+          <a href="#70s" className={styles.hiddenButton}>
+          <TimelineDot color="primary">
+            <LibraryMusicIcon />
+          </TimelineDot>
+          </a>
+          <TimelineConnector />
+        </TimelineSeparator>
+        <TimelineContent sx={{ py: '80px', px: 4, align : "left" }}>
+          <Typography variant="h6" component="span">
+          1970s
+          </Typography>
+          <Typography> Catch You On The Flip Side</Typography>
         </TimelineContent>
       </TimelineItem>
     </Timeline>

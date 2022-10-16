@@ -153,10 +153,10 @@ def addUserQuery(userID, password):
     return query
 
 def getUserQuery(userID):
-    return "SELECT * FROM `Users` WHERE userID = '" + str(userID) + "';"
+    return "SELECT `userID` FROM `Users` WHERE userID = '" + str(userID) + "';"
 
 def getUsersQuery():
-    return "SELECT * FROM `Users` WHERE userID IS NOT NULL AND password IS NOT NULL;"
+    return "SELECT `userID` FROM `Users` WHERE userID IS NOT NULL AND password IS NOT NULL;"
 
 # ---------------------------------------- MySQL Request Queries ---------------------------------------- #
 
@@ -173,10 +173,10 @@ def rejectRequestQuery(userID, personID):
     return "UPDATE Requests SET 'status' = 'rejected' WHERE `call` = '" + userID + "' AND `response` = '" + personID + "';"
 
 def getFriendsQuery(userID):
-    return "SELECT `response` FROM `Requests` WHERE `userID` = '" + userID + "' AND `call` = 'accepted';" 
+    return "SELECT `response` FROM `Requests` WHERE `call` = '" + userID + "' AND `status` = 'accepted';" 
 
 def getPendingQuery(userID):
-    return "SELECT `response` FROM `Requests` WHERE `userID` = '" + userID + "' AND `call` = 'pending';"
+    return "SELECT `response` FROM `Requests` WHERE `call` = '" + userID + "' AND `status` = 'pending';"
 
 def removeRejectedQuery():
     return "DELETE FROM `Requests` WHERE 'status' = 'rejected';"
@@ -353,25 +353,45 @@ def index():
 @app.route('/api/friends', methods=['GET'])
 def friends():
     name = request.headers['Name']
+    answer = execute_read_query(connection, getFriendsQuery(name))
     
-    return {"message" :""}
+    return {"message" :answer}
+
+@app.route('/api/search', methods=['GET'])
+def search():
+    query = request.headers['query']
+    print(query)
+    answer = getAlbumsFromSearch(query, 25)
+    
+    return {"message" :answer}
 
 @app.route('/api/users', methods=['GET'])
 def users():
-
-    return {"message" :["Stephen", "Keerthi", "Eshan"]}
+    answer = execute_read_query(connection, getUsersQuery())
+    return {"message" :answer}
 
 @app.route('/api/reqs', methods=['GET'])
 def requests():
     name = request.headers['Name']
-    return {"message" :["Stephen", "Keerthi", "Eshan"]}
+    answer = execute_read_query(connection, "select `call` from `Requests` where `response` = '" + name + "' and `status` = 'pending';")
+    return {"message" :answer}
 
 @app.route('/api/acceptreqs', methods=['POST'])
 def acceptRequests():
     name = request.headers['Name']
     friend = request.headers['friend']
+    execute_query(connection, acceptRequestQuery(name, friend))
 
-    return {"message" :["Stephen", "Keerthi", "Eshan"]}
+    return {"message" :"success"}
+
+@app.route('/api/addtolibrary', methods=['POST'])
+def addtolib():
+    name = request.headers['Name']
+    uri = request.headers['uri']
+    info = getAlbumInfoSpotify(uri)
+    execute_query(connection, addToLibrary(uri, info['title'], info['artist'], info['releaseDate'], info['artwork'], info['link'], name))
+
+    return {"message" :"success"}
 
 @app.route('/api/library', methods=['GET'])
 def library():
