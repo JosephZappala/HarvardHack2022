@@ -21,6 +21,12 @@
 
   h1 {
     text-align: center;
+    margin-top:1%;
+    color: #1db954;
+  }
+
+  p {
+    text-align: center;
   }
   a {
     all: unset;

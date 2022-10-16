@@ -78,13 +78,17 @@ return (
   <Paper
       sx={{
         p: 2,
-        maxWidth: 250,
-        margin: 3,
+        maxWidth: 400,
+        margin: 2,
+        paddingLeft:3,
         flexGrow: 1,
         backgroundColor: '#1db954',
         // textAlign: 'center',
         // align: 'left',
-        justifyContent: 'flex-end' 
+        justifyContent: 'flex-end' ,
+        fontFamily: 'comic sans', 
+        fontWeight: 'bolder',
+        color: 'black'
       }}
     >
 

@@ -279,7 +279,17 @@ def index():
 
 @app.route('/api/friends', methods=['GET'])
 def friends():
+    name = request.headers['Name']
+    return {"message" :["Stephen", "Keerthi", "Eshan"]}
 
+@app.route('/api/users', methods=['GET'])
+def users():
+
+    return {"message" :["Stephen", "Keerthi", "Eshan"]}
+
+@app.route('/api/reqs', methods=['GET'])
+def requests():
+    name = request.headers['Name']
     return {"message" :["Stephen", "Keerthi", "Eshan"]}
 
 @app.route('/api/library', methods=['GET'])

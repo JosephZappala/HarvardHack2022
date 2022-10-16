@@ -35,8 +35,8 @@ function EditPage() {
   return (
     <div >
       <h1>My Page</h1>
-      <button> Add New Item</button>
-      <button onClick={() =>save(document)}> Save Room Layout</button>
+      <button className={styles.topButtons} style={{width:"40%"}}> Add New Item</button>
+      <button className={styles.topButtons} style={{width:"40%"}}onClick={() =>save(document)}> Save Room Layout</button>
 
       <div id="mainRoom"> 
       <img src={wall} draggable="false" className={styles.mainImage} alt="Main Wall"></img>

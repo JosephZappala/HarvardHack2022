@@ -22,8 +22,8 @@ function UserPage(props) {
 
   return (
     <div >
-      {(sessionStorage.getItem("user") === null || sessionStorage.getItem("user") !== props.account) ? (<h1>{sessionStorage.getItem("user")}'s Page</h1>):(<h1>My Page</h1>)}
-      {(sessionStorage.getItem("user") === null || sessionStorage.getItem("user") !== props.account) ? (<p></p>):(<button onClick={() => navigate("/editpage")}> Edit Page </button>)}
+      <h1>{sessionStorage.getItem("user")}'s Page</h1>
+      {(sessionStorage.getItem("user") === null || sessionStorage.getItem("user") !== props.account) ? (<p></p>):(<button className={styles.topButtons} style={{width:"90%"}}onClick={() => navigate("/editpage")}> Edit Page </button>)}
       <div id="mainRoom"> 
       <img src={wall} draggable="false" className={styles.mainImage} alt="Main Wall"></img>
       {items === null ? (<p></p>):(

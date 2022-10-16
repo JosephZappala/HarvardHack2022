@@ -1,6 +1,8 @@
 import {React, useState } from 'react';
 import { Link } from 'react-router-dom';
 
+import icon from './Pages/Images/Icon.png';
+
 
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -62,7 +64,7 @@ function Nav() {
           
         <Container maxWidth="xl">
           <Toolbar disableGutters>
-            <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
+            <img src={icon} style={{height:"50%"}} alt="icon Not Found"></img>
             <Typography
               variant="h6"
               noWrap
