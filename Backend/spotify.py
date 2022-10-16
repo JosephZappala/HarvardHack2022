@@ -21,10 +21,10 @@ album_uri = 'spotify:album:2ODvWsOgouMbaA5xf0RkJe'
 
 clientId = '2f882bcc6bac4d089ddb0d28dbb3f502'
 clientSecret = 'f6f45b4829f945a4bd6d2e068a43fbfc'
-# redirectURI = 'http://localhost:8888/callback'
-# spotify = spotipy.Spotify(client_credentials_manager=SpotifyClientCredentials(client_id=clientId, client_secret=clientSecret))
-# results = spotify.album(album_uri)
-# limit = 50
+redirectURI = 'http://localhost:8888/callback'
+spotify = spotipy.Spotify(client_credentials_manager=SpotifyClientCredentials(client_id=clientId, client_secret=clientSecret))
+results = spotify.album(album_uri)
+limit = 50
 
 # ---------------------------------------- MySQL Connections / Initializations ---------------------------------------- #
 
@@ -42,7 +42,7 @@ def create_connection(host_name, user_name, user_password, db_name):
         print(f"The error '{e}' occurred")
     return connection
 
-
+connection = create_connection("10.253.20.232", "guest", password, dbName)
 
 
 def execute_query(connection, query):
@@ -250,7 +250,7 @@ def findDecade(date):
     else:
         return -1
 
-# ---------------------------------------- Main Testing ---------------------------------------- #
+# ---------------------------------------- Flask STUFFFF ---------------------------------------- #
 
 
 app = Flask(__name__)
@@ -267,21 +267,23 @@ def friends():
 
 @app.route('/api/library', methods=['GET'])
 def library():
+    name = request.headers['Name']
+    print(name)
 
     return {"message" :["Stephen", "Keerthi", "Eshan"]}
 
 
-@app.route('/saveroom', methods=['POST'])
+@app.route('/api/saveroom', methods=['POST'])
 def saveRoom():
     data = request.json
     print(data)
     return {"message":"success"}
 
-# if __name__ == "__main__":
-#     app.run(debug=True, port=8080)
+if __name__ == "__main__":
+    app.run(debug=True, port=8080)
 
 # I know this is terrible spot I dont know how python works
-connection = create_connection("10.253.20.232", "root", password, dbName)
+#
 # execute_query(connection, "DROP TABLE IF EXISTS `Albums`;")
 # execute_query(connection, "DROP TABLE IF EXISTS `Users`;")
 # execute_query(connection, createAlbumTableQuery(dbName))

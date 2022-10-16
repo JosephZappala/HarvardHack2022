@@ -6,15 +6,15 @@ function Library() {
  let [results, setResults] = useState(null)
 
   useEffect(() => {
+    const requestOptions = {
+      
+    }
     fetch("/api/library", {
       headers:{
-        "accepts":"application/json"
-
-      },
-      body: JSON.stringify({
-        name: sessionStorage.getItem("user"),
-        
-      })
+        "accepts":"application/json",
+        "name": sessionStorage.getItem("user")
+      }
+      
     })
     .then(response => response.json())
     .then(data => setResults(data.message))

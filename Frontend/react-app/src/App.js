@@ -212,7 +212,7 @@ return (
         <Route path='/search' element={<SearchResult />} />
     </Routes>
     </Fragment>
-}       
+       
   </Grid>
 </Grid>
 

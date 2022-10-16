@@ -12,7 +12,7 @@ function EditPage() {
     var body = JSON.parse(sessionStorage.getItem("changingPage"));
     sessionStorage.removeItem("changingPage")
     
-    return fetch('/saveroom',{
+    return fetch('/api/saveroom',{
             'method':'POST',
              headers : {
             'Content-Type':'application/json'

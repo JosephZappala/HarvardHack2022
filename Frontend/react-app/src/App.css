@@ -18,3 +18,12 @@
   [data-popup='tooltip'].popup-overlay {
     background: transparent;
   }
+
+  h1 {
+    text-align: center;
+  }
+  a {
+    all: unset;
+    letter-spacing: 0.3em;
+    color: #1db954;
+  }

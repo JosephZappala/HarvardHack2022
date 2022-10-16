@@ -5,7 +5,6 @@ import SearchResultItem from './SearchResultItem';
 function SearchResult() {
 
     
-    
   return (
     <div  >
       
