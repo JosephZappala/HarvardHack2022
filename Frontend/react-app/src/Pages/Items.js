@@ -14,15 +14,15 @@ function Items(props) {
       }
       else {
 
-        var rect = doc.getElementById(props.index).getBoundingClientRect()
+        var rect = doc.getElementById(props.uri).getBoundingClientRect()
   
-        var left = rect.left;
-        var top = rect.top + window.scrollY - 1137.28125;
+        var left = rect.left - 17.65625 - 225;
+        var top = rect.top + window.scrollY - 1137.28125 + 173.40625;
         var dict ={};
         if (sessionStorage.getItem("changingPage") !== null) {
           dict = JSON.parse(sessionStorage.getItem("changingPage"));
         }
-        dict[props.index] = [left, top]
+        dict[props.uri] = [left, top]
         sessionStorage.setItem("changingPage", JSON.stringify(dict))
   
       }
@@ -53,7 +53,7 @@ function Items(props) {
         >
         <div className='handle'>
           
-          <button id={props.index} onClick={() => openPopUp(document)} className={styles.item} style={{backgroundImage: 'url(' + props.albumImg + ')', backgroundSize: "contain"}}>
+          <button id={props.uri} onClick={() => openPopUp(document)} className={styles.item} style={{backgroundImage: 'url(' + props.albumImg + ')', backgroundSize: "contain"}}>
           </button>
             
         </div>

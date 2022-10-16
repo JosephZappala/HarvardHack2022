@@ -32,14 +32,15 @@ function LibraryItem(props) {
     };
 
     function addToWall() {
-        var body = JSON.parse(props.uri);
+        
     
-    return fetch('/api/saveroom',{
-            'method':'POST',
-             headers : {
-            'Content-Type':'application/json'
-      },
-      body:JSON.stringify(body)})
+        fetch('/api/addtowall',{
+                'method':'POST',
+                headers : {
+                'uri': props.uri,
+                "name": sessionStorage.getItem("user"),
+                'Content-Type':'application/json'
+        }})
 
     }
     

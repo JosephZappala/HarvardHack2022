@@ -12,13 +12,9 @@ function UserPage(props) {
   useEffect(() => {
     fetch("/api/page", {
       headers:{
-        "accepts":"application/json"
-
-      },
-      body: JSON.stringify({
-        name: props.account,
-        
-      })
+        "accepts":"application/json",
+        "name": sessionStorage.getItem("user")
+      }
     })
     .then(response => response.json())
     .then(data => setItems(data.message))

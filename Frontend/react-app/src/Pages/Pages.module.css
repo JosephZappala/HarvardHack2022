@@ -89,4 +89,9 @@
     
 }
 
+.appBackground {
+  background-image: linear-gradient( #292b2c, #111111);
+  height: 100%;
+  margin-top: 65px;
+}
 

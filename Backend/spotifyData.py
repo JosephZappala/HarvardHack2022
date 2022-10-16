@@ -279,14 +279,29 @@ def friends():
 @app.route('/api/library', methods=['GET'])
 def library():
     name = request.headers['Name']
+    answer = execute_read_query(connection, getLibraryQuery(name))
+    #print(answer)
+    return {"message" :answer}
 
-    return {"message" :["Stephen", "Keerthi", "Eshan"]}
+@app.route('/api/page', methods=['GET'])
+def getPage():
+    name = request.headers['Name']
+    answer = execute_read_query(connection, get(name))
+    #print(answer)
+    return {"message" : answer}
 
 
 @app.route('/api/saveroom', methods=['POST'])
 def saveRoom():
     data = request.json
     print(data)
+    return {"message":"success"}
+
+@app.route('/api/addtowall', methods=['POST'])
+def addToWall():
+    uri = request.headers['uri']
+    name = request.headers['Name']
+    execute_query(connection, moveArtworkQuery(uri, name, 400, -400))
     return {"message":"success"}
 
 if __name__ == "__main__":
