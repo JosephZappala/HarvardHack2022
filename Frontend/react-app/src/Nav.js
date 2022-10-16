@@ -18,11 +18,24 @@ import AdbIcon from '@mui/icons-material/Adb';
 import { styled } from '@mui/material/styles';
 import Paper from '@mui/material/Paper';
 
+
+import TextField from '@mui/material/TextField';
+
+
+
+import SearchIcon from "@mui/icons-material/Search";
+
+
 const pages = ['home', 'friends', 'my page', 'my library'];
 const paths = ['/', '/friends', '/mypage', '/library'];
 
 const settings = ['Account', 'Logout'];
 
+const styles = theme => ({
+  multilineColor:{
+      color:'green'
+  }
+});
 
 function Nav() {
     const [anchorElNav, setAnchorElNav] = useState(null);
@@ -141,7 +154,26 @@ function Nav() {
                 </Button>
               ))}
             </Box>
-  
+            
+         
+  <form>
+    <TextField
+      id="search-bar"
+      className="text"
+      onInput={(e) => {
+        // setSearchQuery(e.target.value);
+      }}
+      label="Search song in library"
+      variant="outlined"
+      placeholder="Search..."
+      size="small"
+    />
+    <IconButton type="submit" aria-label="search">
+      <SearchIcon style={{ fill: "#1DB954" }} />
+    </IconButton>
+  </form>
+
+
             <Box sx={{ flexGrow: 0 }}>
               <Tooltip title="Open settings">
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
@@ -171,6 +203,9 @@ function Nav() {
                 ))}
               </Menu>
             </Box>
+
+
+
           </Toolbar>
         </Container>
       </AppBar>

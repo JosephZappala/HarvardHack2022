@@ -1,5 +1,13 @@
 import {useEffect, useState} from "react";
+import CssBaseline from '@mui/material/CssBaseline';
+import Box from '@mui/material/Box';
+import { styled } from '@mui/material/styles';
+import Container from '@mui/material/Container';
+import myGif from './Images/SignIn.gif';
+//\Users\admin\OneDrive - Stony Brook University\Desktop\HarvardHacks\HarvardHack2022\Frontend\react-app\src\Pages\Images
 //import axios from 'axios';
+
+
 
 function Login() {
     const CLIENT_ID = "2f882bcc6bac4d089ddb0d28dbb3f502"
@@ -43,7 +51,11 @@ function Login() {
         <div>
         <h1>SPOTIFY</h1>
         <a href={`${AUTH_ENDPOINT}?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=${RESPONSE_TYPE}`}>Log In To Spotify</a>
+     
         </div>
+        
+      
+
     )
 
 }
