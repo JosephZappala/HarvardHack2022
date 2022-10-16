@@ -7,10 +7,12 @@ import { styled } from '@mui/material/styles';
 import Container from '@mui/material/Container';
 import myGif from './Images/SignIn.gif';
 import Paper from '@mui/material/Paper';
+import { useNavigate } from 'react-router-dom';
 
 
 
 function HomePage() {
+  const navigate = useNavigate()
 
   return (
     <div >
@@ -21,7 +23,7 @@ function HomePage() {
         id="userName"
         label="Name"
         />
-    <Button onClick={() => {sessionStorage.setItem("user", document.getElementById("userName").value);document.getElementById("userName").value = ""}}>Sign In</Button>
+    <Button onClick={() => {sessionStorage.setItem("user", document.getElementById("userName").value);document.getElementById("userName").value = "";navigate('/mypage')}}>Sign In</Button>
 
     <Paper
       sx={{

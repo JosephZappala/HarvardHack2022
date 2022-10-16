@@ -28,7 +28,7 @@ function Library() {
         results.length === 0 ? (<p>You have nothing in your library</p>): (
       
         results.map((key) => 
-            <LibraryItem albumName={key[1]} uri={key[0]} link={key[5]} albumImg={key[4]} />
+            <LibraryItem albumName={key[1]} uri={key[0]} xcorr={key[7]} link={key[5]} albumImg={key[4]} />
         ))
         )}
     </div>

@@ -280,7 +280,8 @@ def index():
 @app.route('/api/friends', methods=['GET'])
 def friends():
     name = request.headers['Name']
-    return {"message" :["Stephen", "Keerthi", "Eshan"]}
+    
+    return {"message" :]}
 
 @app.route('/api/users', methods=['GET'])
 def users():
@@ -324,6 +325,13 @@ def addToWall():
     uri = request.headers['uri']
     name = request.headers['Name']
     execute_query(connection, moveArtworkQuery(uri, name, 400, -400))
+    return {"message":"success"}
+
+@app.route('/api/takefromwall', methods=['POST'])
+def takeFromWall():
+    uri = request.headers['uri']
+    name = request.headers['Name']
+    execute_query(connection, rerackAlbumQuery(uri, name))
     return {"message":"success"}
 
 if __name__ == "__main__":

@@ -49,6 +49,19 @@ function LibraryItem(props) {
         }})
 
     }
+
+    function takeFromWall() {
+        
+    
+        fetch('/api/takefromwall',{
+                'method':'POST',
+                headers : {
+                'uri': props.uri,
+                "name": sessionStorage.getItem("user"),
+                'Content-Type':'application/json'
+        }})
+
+    }
     
 
     function openPopUp() {
@@ -94,7 +107,9 @@ function LibraryItem(props) {
                         <div className={styles.rightOfPopUp}>
                             <h2>{props.albumName}</h2>
                             <button onClick={() => window.location.href = props.link}>Open spotify</button>
-                            <button onClick={addToWall}>Pin to Wall</button>
+                            {props.xcorr=== null ? (<button onClick={addToWall}>Pin To Wall</button>):
+                            (<button onClick={takeFromWall}>Take Off Wall</button>)
+                             }
                         </div>
                     </Typography>
                 </Box>
