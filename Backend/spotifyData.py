@@ -1,4 +1,6 @@
 from random import randrange
+from flask import Flask, request
+
 
 import mysql.connector
 import spotipy
@@ -7,7 +9,8 @@ from spotipy.oauth2 import SpotifyClientCredentials
 
 # ---------------------------------------- Local Server Info ---------------------------------------- #
 
-hostName = 'localhost'
+#hostName = 'localhost'
+hostName = "10.253.20.232"
 userName = 'root'
 password = 'Wolfie69medaddy!'
 dbName = 'Test'
@@ -256,9 +259,41 @@ def helpJoe():
     
 # ---------------------------------------- Main Testing ---------------------------------------- #
 
-connection = create_connection(hostName, userName, password, dbName)
-execute_query(connection, "DROP TABLE IF EXISTS `Albums`;")
-execute_query(connection, "DROP TABLE IF EXISTS `Users`;")
-execute_query(connection, createAlbumTableQuery(dbName))
-execute_query(connection, createUserTableQuery(dbName))
-execute_query(connection, addUserQuery(login_username, login_password))
+connection = create_connection(hostName, "guest", password, dbName)
+
+# ---------------------------------------- Flask STUFFFF ---------------------------------------- #
+
+
+app = Flask(__name__)
+
+@app.route('/')
+def index():
+    return "Hello, World!"
+
+
+@app.route('/api/friends', methods=['GET'])
+def friends():
+
+    return {"message" :["Stephen", "Keerthi", "Eshan"]}
+
+@app.route('/api/library', methods=['GET'])
+def library():
+    name = request.headers['Name']
+
+    return {"message" :["Stephen", "Keerthi", "Eshan"]}
+
+
+@app.route('/api/saveroom', methods=['POST'])
+def saveRoom():
+    data = request.json
+    print(data)
+    return {"message":"success"}
+
+if __name__ == "__main__":
+    app.run(debug=True, port=8080)
+
+# execute_query(connection, "DROP TABLE IF EXISTS `Albums`;")
+# execute_query(connection, "DROP TABLE IF EXISTS `Users`;")
+# execute_query(connection, createAlbumTableQuery(dbName))
+# execute_query(connection, createUserTableQuery(dbName))
+# execute_query(connection, addUserQuery(login_username, login_password))

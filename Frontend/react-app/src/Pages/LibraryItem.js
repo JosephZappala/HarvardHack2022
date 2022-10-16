@@ -31,6 +31,18 @@ function LibraryItem(props) {
         p: 4,
     };
 
+    function addToWall() {
+        var body = JSON.parse(props.uri);
+    
+    return fetch('/api/saveroom',{
+            'method':'POST',
+             headers : {
+            'Content-Type':'application/json'
+      },
+      body:JSON.stringify(body)})
+
+    }
+    
 
     function openPopUp() {
         prominent(props.albumImg, { amount: 7 }).then(color => {
@@ -75,6 +87,7 @@ function LibraryItem(props) {
                         <div className={styles.rightOfPopUp}>
                             <h2>{props.albumName}</h2>
                             <button onClick={() => window.location.href = props.link}>Open spotify</button>
+                            <button onClick={addToWall}>Pin to Wall</button>
                         </div>
                     </Typography>
                 </Box>
