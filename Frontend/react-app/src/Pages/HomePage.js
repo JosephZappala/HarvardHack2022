@@ -8,6 +8,7 @@ import Container from '@mui/material/Container';
 import myGif from './Images/SignIn.gif';
 import Paper from '@mui/material/Paper';
 import { useNavigate } from 'react-router-dom';
+import Grid from '@mui/material/Grid';
 
 
 
@@ -18,12 +19,7 @@ function HomePage() {
     <div >
       <h1>Welcome</h1>
 
-      <TextField
-      
-        id="userName"
-        label="Name"
-        />
-    <Button onClick={() => {sessionStorage.setItem("user", document.getElementById("userName").value);document.getElementById("userName").value = "";navigate('/mypage')}}>Sign In</Button>
+     
 
     <Paper
       sx={{
@@ -34,8 +30,26 @@ function HomePage() {
           theme.palette.mode = 'rgb(165, 107, 65)',
       }}
     >
-            <img src={myGif} alt="my-gif" />
+        
      
+            <Grid container spacing={2}>
+
+
+            <Grid item xs={8}>
+              <img src={myGif} alt="my-gif" />
+            </Grid>
+            <Grid item xs={4}>
+            <TextField
+      
+      id="userName"
+      label="Name"
+      />
+  <Button onClick={() => {sessionStorage.setItem("user", document.getElementById("userName").value);document.getElementById("userName").value = "";navigate('/mypage')}}>Sign In</Button>
+            </Grid>
+          </Grid>
+
+
+
     </Paper>
       
       

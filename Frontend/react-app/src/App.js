@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 import './App.css';
 import styles from './Pages/Pages.module.css';
 
-import { BrowserRouter as Router, Routes, Route, useNavigate, Navigate, Link} from 'react-router-dom';
+import {  Routes, Route, useParams} from 'react-router-dom';
 
 import UserPage from './Pages/UserPage';
 import Friends from './Pages/Friends';
@@ -10,7 +10,6 @@ import Library from './Pages/Library';
 import Login from './Pages/Login';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
-import useMediaQuery from '@mui/material/useMediaQuery';
 import EditPage from './Pages/EditPage';
 import Nav from './Nav'
 
@@ -21,8 +20,7 @@ import TimelineConnector from '@mui/lab/TimelineConnector';
 import TimelineContent from '@mui/lab/TimelineContent';
 import TimelineDot from '@mui/lab/TimelineDot';
 import TimelineOppositeContent from '@mui/lab/TimelineOppositeContent';
-import Box from '@mui/material/Box';
-import Container from '@mui/material/Container';
+
 import Paper from '@mui/material/Paper';
 
 
@@ -54,21 +52,18 @@ const darkTheme = createTheme({
   
   
 function App() {
-
+  let { userId } = useParams();
+  let { query } = useParams();
 
   
 
 return (
-
-  
 
     <ThemeProvider theme={darkTheme}>
     <CssBaseline />
   
 
 <Grid container spacing={2}  >
-
-
 
 
   <Grid item xs={2} color = "white" fontFamily={"Apple Color Emoji"} align = 'left'>
@@ -221,7 +216,9 @@ return (
         <Route path='/settings' element={<></> } />
         <Route path='/editpage' element={<EditPage />} />
         <Route path='/login' element={<Login />} />
-        <Route path='/search' element={<SearchResult />} />
+        <Route path='/search/:query' element={<SearchResult search={query}/>} />
+        <Route path='/page/:userId' element={<UserPage account={userId} />} />
+
     </Routes>
     </div>
     </Fragment>

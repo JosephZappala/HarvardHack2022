@@ -31,6 +31,16 @@ function SearchResultItem(props) {
         p: 4,
     };
 
+    function addToLibrary() {
+        fetch("/api/addtolibrary", {
+            'method':'POST',
+            headers:{
+              "accepts":"application/json",
+              "name": sessionStorage.getItem("user"),
+              "uri": props.uri
+            }
+          })
+    }
 
     function openPopUp() {
         prominent(props.albumImg, { amount: 7 }).then(color => {
@@ -75,6 +85,7 @@ function SearchResultItem(props) {
                         <div className={styles.rightOfPopUp}>
                             <h2>{props.albumName}</h2>
                             <button onClick={() => window.location.href = props.link}>Open spotify</button>
+                            <button onClick={addToLibrary}>Add to Library</button>
                         </div>
                     </Typography>
                 </Box>

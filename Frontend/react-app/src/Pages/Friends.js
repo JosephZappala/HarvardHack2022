@@ -3,6 +3,7 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import styles from './Pages.module.css';
+import { useNavigate } from 'react-router-dom';
 
 
 function Friends() {
@@ -13,6 +14,7 @@ function Friends() {
   const [requests, setRequests] = useState(null);
   const handleAddClose = () => setAddOpen(false);
   const handleReqClose = () => setReqOpen(false);
+  const navigate = useNavigate()
 
 
   const style = {
@@ -59,7 +61,20 @@ function Friends() {
 
 function addFriend(friend) {
     
-  fetch("/api/reqs", {
+  fetch("/api/acceptreqs", {
+    'method':'POST',
+    headers:{
+      "accepts":"application/json",
+      "name": sessionStorage.getItem("user"),
+      "friend": friend
+    }
+  })
+  
+}
+
+function addRequest(friend) {
+    
+  fetch("/api/makereq", {
     'method':'POST',
     headers:{
       "accepts":"application/json",
@@ -101,7 +116,7 @@ function addFriend(friend) {
                           {people.map((key) => 
                           <Fragment>
                             <li className={styles.searchItem}>{key}</li>
-                            <button onClick={addFriend(key)} style={{float:"left"}}>Add Friend</button>
+                            <button onClick={addFriend(key)} style={{float:"right"}}>Add Friend</button>
                             </Fragment>
                           )}
                           
@@ -120,22 +135,21 @@ function addFriend(friend) {
                     <Typography id="modal-modal-description" sx={{ width: "100%" }}>
                         <h1>View Requests</h1>
                         {requests === null ? (<p>You have no requests</p>):(
-                        <ul>
-                          {requests.map((key) => 
-                            <li className={styles.searchItem}>{key}</li>
-                          )}
+                          requests.map((key) => 
+                            <button onClick={addRequest(key)} className={styles.searchItem}>{key}</button>
+                          )
                           
-                        </ul>)}
+                        )}
                     </Typography>
                 </Box>
             </Modal>
       {friends === null ? (<p>You have no friends</p>):(
-      <ul>
-        {friends.map((key) => 
-          <li className={styles.searchItem}>{key}</li>
-        )}
+      
+        friends.map((key) => 
+          <button onClick={() => navigate('/page/' + key)}className={styles.searchItem}>{key}</button>
+        )
         
-      </ul>)}
+      )}
       
     </div>
   );

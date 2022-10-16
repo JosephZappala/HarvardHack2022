@@ -1,5 +1,5 @@
 import {React, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import icon from './Pages/Images/Icon.png';
 
@@ -42,6 +42,7 @@ const styles = theme => ({
 function Nav() {
     const [anchorElNav, setAnchorElNav] = useState(null);
     const [anchorElUser, setAnchorElUser] = useState(null);
+    const navigate = useNavigate();
   
     const handleOpenNavMenu = (event) => {
         
@@ -164,8 +165,9 @@ function Nav() {
       className="text"
       onInput={(e) => {
         // setSearchQuery(e.target.value);
+        navigate('/search/' + e.target.value)
       }}
-      label="Search song in library"
+      label="Search song in spotify"
       variant="outlined"
       placeholder="Search..."
       size="small"

@@ -1,4 +1,5 @@
 from random import randrange
+import re
 from flask import Flask, request
 import json
 
@@ -281,7 +282,7 @@ def index():
 def friends():
     name = request.headers['Name']
     
-    return {"message" :]}
+    return {"message" :""}
 
 @app.route('/api/users', methods=['GET'])
 def users():
@@ -293,11 +294,17 @@ def requests():
     name = request.headers['Name']
     return {"message" :["Stephen", "Keerthi", "Eshan"]}
 
+@app.route('/api/acceptreqs', methods=['POST'])
+def acceptRequests():
+    name = request.headers['Name']
+    friend = request.headers['friend']
+
+    return {"message" :["Stephen", "Keerthi", "Eshan"]}
+
 @app.route('/api/library', methods=['GET'])
 def library():
     name = request.headers['Name']
     answer = execute_read_query(connection, getLibraryQuery(name))
-    #print(answer)
     return {"message" :answer}
 
 @app.route('/api/page', methods=['GET'])
