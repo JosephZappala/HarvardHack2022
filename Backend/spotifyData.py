@@ -12,8 +12,7 @@ userName = 'root'
 password = 'Wolfie69medaddy!'
 dbName = 'Test'
 
-userID = 1
-login_username = 'stevebyrnesmail@gmail.com'
+userID = 'stevebyrnesmail@gmail.com'
 login_password = 'hackharvard2022'
 
 # ---------------------------------------- SpotiPy Initializations ---------------------------------------- #
@@ -79,8 +78,7 @@ def createAlbumTableQuery(db):
 
 def createUserTableQuery(db):
     query = "CREATE TABLE IF NOT EXISTS `" + db + """`.`Users` (
-        `userID` int NOT NULL AUTO_INCREMENT, 
-        `username` VARCHAR(50) NOT NULL,
+        `userID` VARCHAR(50) NOT NULL,
         `password` VARCHAR(50) NOT NULL,
         PRIMARY KEY (`userID`));
         """
@@ -110,6 +108,9 @@ def rerackAlbumQuery(uri, userID):
 def getLibraryQuery(userID):
     return "SELECT * FROM `Albums` WHERE userID = '" + str(userID) + "' ORDER BY title, artist;"
 
+def getWallArtwork(userID):
+    return "SELECT * FROM `Albums` WHERE userID = '" + str(userID) + "' AND xCoord IS NOT NULL AND yCoord IS NOT NULL;"
+
 def getLibraryByDecadeQuery(userID, decade):
     era = decade[0]
     return "SELECT * FROM `Albums` WHERE userID = '" + str(userID) + "' AND releaseDate LIKE '__" + str(era) + "%';"
@@ -118,7 +119,8 @@ def getAlbumQuery(uri, userID):
     return "SELECT * FROM `Albums` WHERE uri = '" + str(uri) + "' AND userID = '" + str(userID) + "';"
 
 def getAlbumByTitleQuery(search_str, userID):
-    query = "SELECT * FROM `Albums` WHERE title LIKE '%" + search_str + "%' AND userID = '"
+    lc = search_str.lower()
+    query = "SELECT * FROM `Albums` WHERE title LIKE '%" + lc + "%' AND userID = '"
     query = query + str(userID) + "' ORDER BY title, artist;"
     return query
 
@@ -129,11 +131,14 @@ def getAlbumByArtistQuery(search_str, userID):
 
 # ---------------------------------------- MySQL User Queries ---------------------------------------- #
 
-def addUserQuery(username, password):
-    query = "INSERT INTO `Users` (username, password) VALUES ('"
-    query = query + username + "', '"
+def addUserQuery(userID, password):
+    query = "INSERT INTO `Users` (userID, password) VALUES ('"
+    query = query + userID + "', '"
     query = query + password + "');" 
     return query
+
+def getUserQuery(userID):
+    return "SELECT * FROM `Users` WHERE userID = '" + str(userID) + "';"
 
 # ---------------------------------------- MySQL Functions ---------------------------------------- #
 
@@ -213,8 +218,8 @@ def librarySearch(search_str, userID):
         print('Error: No Results Found in Library by Artist')
     return albums
 
-def addSongsWithSearch(search_str, limit):
-    albums = getAlbumsFromSearch(search_str, limit)
+def addAlbumWithSearch(search_str, limit, userIDString):
+    albums = getAlbumsFromSearch(search_str.lower(), limit)
     for album in albums:
         execute_query(connection, addAlbumQuery(
                 album['uri'], 
@@ -223,7 +228,7 @@ def addSongsWithSearch(search_str, limit):
                 album['releaseDate'],
                 album['artwork'],
                 album['link'],
-                1
+                userIDString
                 ))
        
 # ---------------------------------------- Misc. Functions ---------------------------------------- #
@@ -261,4 +266,6 @@ execute_query(connection, "DROP TABLE IF EXISTS `Albums`;")
 execute_query(connection, "DROP TABLE IF EXISTS `Users`;")
 execute_query(connection, createAlbumTableQuery(dbName))
 execute_query(connection, createUserTableQuery(dbName))
-execute_query(connection, addUserQuery(login_username, login_password))
+execute_query(connection, addUserQuery(userID, login_password))
+execute_query(connection, addUserQuery('joe', 'password'))
+execute_query(connection, addAlbumWithSearch('rape', 50, 'joe'))
