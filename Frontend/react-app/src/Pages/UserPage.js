@@ -12,13 +12,9 @@ function UserPage(props) {
   useEffect(() => {
     fetch("/api/page", {
       headers:{
-        "accepts":"application/json"
-
-      },
-      body: JSON.stringify({
-        name: props.account,
-        
-      })
+        "accepts":"application/json",
+        "name": sessionStorage.getItem("user")
+      }
     })
     .then(response => response.json())
     .then(data => setItems(data.message))
@@ -33,7 +29,7 @@ function UserPage(props) {
       {items === null ? (<p></p>):(
       
       items.map((key) => 
-        <Items notEdit={true} albumName={key.albumName} link={key.link} xcord={key.xcord} ycord={key.ycord} albumImg={key.albumImg}></Items>
+        <Items notEdit={true} albumName={key[1]} link={key[5]} xcord={key[7]} ycord={key[8]} albumImg={key[4]}></Items>
         ))
       }
 

@@ -13,7 +13,11 @@ function LibraryItem(props) {
     const [color1, setColor1] = useState();
     const [color2, setColor2] = useState();
     const [open, setOpen] = useState(false);
-    const handleClose = () => setOpen(false);
+    function handleClose() {
+        
+        setOpen(false)
+
+    } 
 
     const style = {
         position: 'absolute',
@@ -24,13 +28,28 @@ function LibraryItem(props) {
         width: '60%',
         height: '80%',
         bgcolor: 'white',
-        opacity: 0.8,
+        opacity: 1,
         //background: ('repeating-linear-gradient( 45deg, ' + color2 + ', ' + color2 + ' 5px, ' + color1 + '5px, ' + color1 + ' 25px )'),
         border: '2px solid #000',
         boxShadow: 24,
         p: 4,
+        animationName: styles.fadeIn,
+        animationDuration: '1s'
     };
 
+    function addToWall() {
+        
+    
+        fetch('/api/addtowall',{
+                'method':'POST',
+                headers : {
+                'uri': props.uri,
+                "name": sessionStorage.getItem("user"),
+                'Content-Type':'application/json'
+        }})
+
+    }
+    
 
     function openPopUp() {
         prominent(props.albumImg, { amount: 7 }).then(color => {
@@ -66,7 +85,7 @@ function LibraryItem(props) {
                 aria-labelledby="modal-modal-title"
                 aria-describedby="modal-modal-description"
             >
-                <Box sx={style}>
+                <Box sx={style} id="myBox">
                     
                     <Typography id="modal-modal-description" sx={{ width: "100%" }}>
                         <div className={styles.leftOfPopUp}>
@@ -75,6 +94,7 @@ function LibraryItem(props) {
                         <div className={styles.rightOfPopUp}>
                             <h2>{props.albumName}</h2>
                             <button onClick={() => window.location.href = props.link}>Open spotify</button>
+                            <button onClick={addToWall}>Pin to Wall</button>
                         </div>
                     </Typography>
                 </Box>

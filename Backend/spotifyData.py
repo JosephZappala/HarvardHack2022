@@ -1,5 +1,7 @@
 from random import randrange
 from flask import Flask, request
+import json
+
 
 import mysql.connector
 import spotipy
@@ -8,22 +10,21 @@ from spotipy.oauth2 import SpotifyClientCredentials
 
 # ---------------------------------------- Local Server Info ---------------------------------------- #
 
+#hostName = 'localhost'
+hostName = "10.253.20.232"
+userName = 'root'
 password = 'Wolfie69medaddy!'
 dbName = 'Test'
 
-userID = 1
-login_username = 'stevebyrnesmail@gmail.com'
+userID = 'stevebyrnesmail@gmail.com'
 login_password = 'hackharvard2022'
 
 # ---------------------------------------- SpotiPy Initializations ---------------------------------------- #
-
-album_uri = 'spotify:album:2ODvWsOgouMbaA5xf0RkJe'
 
 clientId = '2f882bcc6bac4d089ddb0d28dbb3f502'
 clientSecret = 'f6f45b4829f945a4bd6d2e068a43fbfc'
 redirectURI = 'http://localhost:8888/callback'
 spotify = spotipy.Spotify(client_credentials_manager=SpotifyClientCredentials(client_id=clientId, client_secret=clientSecret))
-results = spotify.album(album_uri)
 limit = 50
 
 # ---------------------------------------- MySQL Connections / Initializations ---------------------------------------- #
@@ -41,9 +42,6 @@ def create_connection(host_name, user_name, user_password, db_name):
     except Error as e:
         print(f"The error '{e}' occurred")
     return connection
-
-connection = create_connection("10.253.20.232", "guest", password, dbName)
-
 
 def execute_query(connection, query):
     cursor = connection.cursor()
@@ -84,8 +82,7 @@ def createAlbumTableQuery(db):
 
 def createUserTableQuery(db):
     query = "CREATE TABLE IF NOT EXISTS `" + db + """`.`Users` (
-        `userID` int NOT NULL AUTO_INCREMENT, 
-        `username` VARCHAR(50) NOT NULL,
+        `userID` VARCHAR(50) NOT NULL,
         `password` VARCHAR(50) NOT NULL,
         PRIMARY KEY (`userID`));
         """
@@ -115,6 +112,9 @@ def rerackAlbumQuery(uri, userID):
 def getLibraryQuery(userID):
     return "SELECT * FROM `Albums` WHERE userID = '" + str(userID) + "' ORDER BY title, artist;"
 
+def getWallArtwork(userID):
+    return "SELECT * FROM `Albums` WHERE userID = '" + str(userID) + "' AND xCoord IS NOT NULL AND yCoord IS NOT NULL;"
+
 def getLibraryByDecadeQuery(userID, decade):
     era = decade[0]
     return "SELECT * FROM `Albums` WHERE userID = '" + str(userID) + "' AND releaseDate LIKE '__" + str(era) + "%';"
@@ -123,7 +123,8 @@ def getAlbumQuery(uri, userID):
     return "SELECT * FROM `Albums` WHERE uri = '" + str(uri) + "' AND userID = '" + str(userID) + "';"
 
 def getAlbumByTitleQuery(search_str, userID):
-    query = "SELECT * FROM `Albums` WHERE title LIKE '%" + search_str + "%' AND userID = '"
+    lc = search_str.lower()
+    query = "SELECT * FROM `Albums` WHERE title LIKE '%" + lc + "%' AND userID = '"
     query = query + str(userID) + "' ORDER BY title, artist;"
     return query
 
@@ -134,11 +135,14 @@ def getAlbumByArtistQuery(search_str, userID):
 
 # ---------------------------------------- MySQL User Queries ---------------------------------------- #
 
-def addUserQuery(username, password):
-    query = "INSERT INTO `Users` (username, password) VALUES ('"
-    query = query + username + "', '"
+def addUserQuery(userID, password):
+    query = "INSERT INTO `Users` (userID, password) VALUES ('"
+    query = query + userID + "', '"
     query = query + password + "');" 
     return query
+
+def getUserQuery(userID):
+    return "SELECT * FROM `Users` WHERE userID = '" + str(userID) + "';"
 
 # ---------------------------------------- MySQL Functions ---------------------------------------- #
 
@@ -202,24 +206,24 @@ def previewAlbum(uri):
 
 # ---------------------------------------- Full-Functions ---------------------------------------- #
 
-def librarySearch(search_str, userID, releaseDate):
+def librarySearch(search_str, userID):
     albums = []
     try:
-        albums = execute_read_query(connection, getAlbumByTitleQuery(search_str, userID, releaseDate))
+        albums = execute_read_query(connection, getAlbumByTitleQuery(search_str, userID))
         for album in albums:
             print(album)
     except TypeError:
         print('Error: No Results Found in Library by Title')
     try:
-        albums = execute_read_query(connection, getAlbumByArtistQuery(search_str, userID, releaseDate))
+        albums = execute_read_query(connection, getAlbumByArtistQuery(search_str, userID))
         for album in albums:
             print(album)
     except TypeError:
         print('Error: No Results Found in Library by Artist')
     return albums
 
-def addSongsWithSearch(search_str, limit):
-    albums = getAlbumsFromSearch(search_str, limit)
+def addAlbumWithSearch(search_str, limit, userIDString):
+    albums = getAlbumsFromSearch(search_str.lower(), limit)
     for album in albums:
         execute_query(connection, addAlbumQuery(
                 album['uri'], 
@@ -228,7 +232,7 @@ def addSongsWithSearch(search_str, limit):
                 album['releaseDate'],
                 album['artwork'],
                 album['link'],
-                1
+                userIDString
                 ))
        
 # ---------------------------------------- Misc. Functions ---------------------------------------- #
@@ -250,6 +254,19 @@ def findDecade(date):
     else:
         return -1
 
+def helpJoe():
+    joeIP = '10.253.22.153'
+    createUserString = "create user 'guest'@'10.253.22.153' DEFAULT ROLE administrator, developer;"
+    grantPrivelegesString = "GRANT ALL PRIVILEGES ON Test.* TO 'guest'@'10.253.22.153';"
+    execute_query(connection, createUserString)
+    execute_query(connection, grantPrivelegesString)
+    execute_query(connection, "FLUSH PRIVILEGES;")
+    return
+    
+# ---------------------------------------- Main Testing ---------------------------------------- #
+
+connection = create_connection(hostName, "guest", password, dbName)
+
 # ---------------------------------------- Flask STUFFFF ---------------------------------------- #
 
 
@@ -268,49 +285,42 @@ def friends():
 @app.route('/api/library', methods=['GET'])
 def library():
     name = request.headers['Name']
-    print(name)
+    answer = execute_read_query(connection, getLibraryQuery(name))
+    #print(answer)
+    return {"message" :answer}
 
-    return {"message" :["Stephen", "Keerthi", "Eshan"]}
+@app.route('/api/page', methods=['GET'])
+def getPage():
+    name = request.headers['Name']
+    answer = execute_read_query(connection, getWallArtwork(name))
+    return {"message" : answer}
 
 
 @app.route('/api/saveroom', methods=['POST'])
 def saveRoom():
     data = request.json
-    print(data)
+    name = request.headers['Name']
+    if type(data) == dict:
+        key = list(data.keys())[0]
+        execute_query(connection, moveArtworkQuery(key, name, data[key][0], data[key][1]))
+        return {"message":"success"}
+    for dat in data:
+        key = list(dat.keys())[0]
+        execute_query(connection, moveArtworkQuery(key, name, dat[key][0], dat[key][1]))
+    return {"message":"success"}
+
+@app.route('/api/addtowall', methods=['POST'])
+def addToWall():
+    uri = request.headers['uri']
+    name = request.headers['Name']
+    execute_query(connection, moveArtworkQuery(uri, name, 400, -400))
     return {"message":"success"}
 
 if __name__ == "__main__":
     app.run(debug=True, port=8080)
 
-# I know this is terrible spot I dont know how python works
-#
 # execute_query(connection, "DROP TABLE IF EXISTS `Albums`;")
 # execute_query(connection, "DROP TABLE IF EXISTS `Users`;")
 # execute_query(connection, createAlbumTableQuery(dbName))
 # execute_query(connection, createUserTableQuery(dbName))
 # execute_query(connection, addUserQuery(login_username, login_password))
-# addSongsWithSearch('party', limit)
-# albumTest = getAlbumInfoSpotify(album_uri)
-# execute_query(connection, addAlbumQuery(album_uri, 
-#                                         albumTest['title'],
-#                                         albumTest['artist'],
-#                                         albumTest['releaseDate'],
-#                                         albumTest['artwork'],
-#                                         albumTest['link'],
-#                                         1))
-# execute_query(connection, removeFromLibrary(album_uri, 1))
-# execute_query(connection, addAlbumQuery(album_uri, 
-#                                         albumTest['title'],
-#                                         albumTest['artist'],
-#                                         albumTest['releaseDate'],
-#                                         albumTest['artwork'],
-#                                         albumTest['link'],
-#                                         1))
-# execute_query(connection, moveArtworkQuery(album_uri, 1, '10', '-30'))
-# execute_query(connection, rerackAlbumQuery(album_uri, 1))
-# results = execute_read_query(connection, getAlbumByArtistQuery('', 1))
-# for album in results:
-#     print(album[1] + ": " + album[2])
-#     print()
-
-
