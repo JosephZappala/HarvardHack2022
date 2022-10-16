@@ -25,6 +25,7 @@ function HomePage() {
       sx={{
         p: 2,
         margin: 'auto',
+        marginRight:"-75px",
         flexGrow: 1,
         backgroundColor: (theme) =>
           theme.palette.mode = 'rgb(165, 107, 65)',
@@ -44,7 +45,8 @@ function HomePage() {
       id="userName"
       label="Name"
       />
-  <Button onClick={() => {sessionStorage.setItem("user", document.getElementById("userName").value);document.getElementById("userName").value = "";navigate('/mypage')}}>Sign In</Button>
+  
+    <Button onClick={() => {sessionStorage.setItem("user", document.getElementById("userName").value);document.getElementById("userName").value = "";navigate('/mypage')}}>Sign In</Button>
             </Grid>
           </Grid>
 
