@@ -1,6 +1,5 @@
 import React, { Fragment } from 'react';
 import './App.css';
-import styles from './Pages/Pages.module.css';
 import { BrowserRouter as Router, Routes, Route, useNavigate, Navigate, Link} from 'react-router-dom';
 
 import UserPage from './Pages/UserPage';
@@ -36,7 +35,7 @@ import HomePage from './Pages/HomePage';
 
 
 
-import TextField from '@mui/material/TextField';
+
 
 
 
@@ -207,7 +206,7 @@ return (
 
 <Fragment>
 <Nav></Nav>
-  <div className={styles.appBackground} >    
+
     <Routes>
         <Route path='/'  element={<HomePage />} />
         <Route path='/mypage' element={<UserPage account={sessionStorage.getItem("user")}/>} />
@@ -218,7 +217,6 @@ return (
         <Route path='/login' element={<Login />} />
         <Route path='/search' element={<SearchResult />} />
     </Routes>
-  </div>
     </Fragment>
        
   </Grid>
